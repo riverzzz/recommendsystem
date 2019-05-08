@@ -2,7 +2,6 @@ package zjx.recommendsystem.common.util.kafkastream
 
 
 import org.I0Itec.zkclient.ZkClient
-import org.I0Itec.zkclient.serialize.SerializableSerializer
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.SparkContext
 import org.apache.spark.internal.Logging
@@ -26,9 +25,9 @@ import scala.collection.JavaConverters._
   */
 object SparkKafkaStream extends Logging {
 
-  def createDirectStream(streamingContext:StreamingContext,
-                         topics:Array[String],
-                         kafkaParams:Map[String, Object]):InputDStream[ConsumerRecord[String, String]] = {
+  def createDirectStream(streamingContext: StreamingContext,
+                         topics: Array[String],
+                         kafkaParams: Map[String, Object]): InputDStream[ConsumerRecord[String, String]] = {
     val stream = KafkaUtils.createDirectStream[String, String](
       streamingContext,
       PreferConsistent,
@@ -37,29 +36,29 @@ object SparkKafkaStream extends Logging {
     stream
   }
 
-  def createDirectStreamWithOffset(streamingContext:StreamingContext,
-                                   topics:Array[String],
-                                   kafkaParams:Map[String, Object],
-                                   zkClient: ZkClient = new ZkClient(zkServers,10000,10000,SerializableSerializer),
-                                   zkOffsetPath: String = zkOffsetsPath):InputDStream[ConsumerRecord[String, String]] = {
-    val fromOffsetsData = KafkaOffsetManager.readOffsets(topics,zkClient,zkOffsetPath)
+  def createDirectStreamWithOffset(streamingContext: StreamingContext,
+                                   topics: Array[String],
+                                   kafkaParams: Map[String, Object],
+                                   zkClient: ZkClient = new ZkClient(zkServers, 10000, 10000),
+                                   zkOffsetPath: String = zkOffsetsPath): InputDStream[ConsumerRecord[String, String]] = {
+    val fromOffsetsData = KafkaOffsetManager.readOffsets(topics, zkClient, zkOffsetPath)
     val stream = fromOffsetsData match {
       case None =>
-        createDirectStream(streamingContext,topics,kafkaParams)
+        createDirectStream(streamingContext, topics, kafkaParams)
       case Some(fromOffsets) =>
         KafkaUtils.createDirectStream[String, String](
           streamingContext,
           PreferConsistent,
-          Assign[String,String](fromOffsets.keys.toList, kafkaParams, fromOffsets)
+          Assign[String, String](fromOffsets.keys.toList, kafkaParams, fromOffsets)
         )
     }
     stream
   }
 
-  def createRDDWithOffsetRanges(sparkContext:SparkContext,
-                                kafkaParams:Map[String, Object],
-                                offsetRanges:Array[OffsetRange]):RDD[ConsumerRecord[String, String]] = {
-    val rdd = KafkaUtils.createRDD[String,String](sparkContext,kafkaParams.asJava,offsetRanges,PreferConsistent)
+  def createRDDWithOffsetRanges(sparkContext: SparkContext,
+                                kafkaParams: Map[String, Object],
+                                offsetRanges: Array[OffsetRange]): RDD[ConsumerRecord[String, String]] = {
+    val rdd = KafkaUtils.createRDD[String, String](sparkContext, kafkaParams.asJava, offsetRanges, PreferConsistent)
     rdd
   }
 

@@ -1,7 +1,6 @@
 package zjx.recommendsystem.streaming
 
 import org.I0Itec.zkclient.ZkClient
-import org.I0Itec.zkclient.serialize.SerializableSerializer
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf
 import org.apache.spark.internal.Logging
@@ -42,7 +41,7 @@ object KafkaStreamTest extends Logging {
   def directStreamWithOffset(ssc: StreamingContext): Unit = {
     //创建zkClient注意最后一个参数最好是ZKStringSerializer类型的，不然写进去zk里面的偏移量是乱码
     val zkClient = new ZkClient("192.168.10.6:2181,192.168.10.7:2181,192.168.10.8:2181",
-      30000, 30000, SerializableSerializer)
+      30000, 30000)
     val zkOffsetPath = "/sparkstreaming" //zk的路径
     val stream = SparkKafkaStream.createDirectStreamWithOffset(ssc, topics, kafkaParams, zkClient, zkOffsetPath)
 
