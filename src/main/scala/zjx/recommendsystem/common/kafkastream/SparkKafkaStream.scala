@@ -1,5 +1,4 @@
-package zjx.recommendsystem.common.util.kafkastream
-
+package zjx.recommendsystem.common.kafkastream
 
 import org.I0Itec.zkclient.ZkClient
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -11,7 +10,7 @@ import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.{Assign, Subscribe}
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010._
-import zjx.recommendsystem.common.util.ConfigUtils._
+import zjx.recommendsystem.common.constant.ConfigConstant._
 
 import scala.collection.JavaConverters._
 

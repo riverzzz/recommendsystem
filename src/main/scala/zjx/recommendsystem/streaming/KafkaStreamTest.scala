@@ -6,7 +6,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.internal.Logging
 import org.apache.spark.streaming.kafka010.{CanCommitOffsets, HasOffsetRanges}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import zjx.recommendsystem.common.util.kafkastream.{KafkaOffsetManager, SparkKafkaStream}
+import zjx.recommendsystem.common.kafkastream.{KafkaOffsetManager, SparkKafkaStream}
 
 /**
   * @title: KafkaStreamTest
@@ -80,5 +80,6 @@ object KafkaStreamTest extends Logging {
 
     //等待任务终止
     ssc.awaitTermination()
+
   }
 }

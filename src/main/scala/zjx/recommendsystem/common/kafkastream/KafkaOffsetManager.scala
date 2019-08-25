@@ -1,4 +1,4 @@
-package zjx.recommendsystem.common.util.kafkastream
+package zjx.recommendsystem.common.kafkastream
 
 import org.I0Itec.zkclient.ZkClient
 import org.apache.kafka.common.TopicPartition

@@ -11,7 +11,9 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.2"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-sql
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.2"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-hive
-libraryDependencies += "org.apache.spark" %% "spark-hive" % "2.4.2"
+libraryDependencies += "org.apache.spark" %% "spark-hive" % "2.4.2" % "provided"
+// https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10
+libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.4.3" % "provided"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-streaming
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "2.4.1" % "provided"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10
@@ -22,3 +24,10 @@ libraryDependencies += "org.apache.kafka" % "kafka-clients" % "2.2.0"
 libraryDependencies += "com.101tec" % "zkclient" % "0.11"
 // https://mvnrepository.com/artifact/com.typesafe/config
 libraryDependencies += "com.typesafe" % "config" % "1.3.4"
+// https://mvnrepository.com/artifact/com.alibaba/fastjson
+libraryDependencies += "com.alibaba" % "fastjson" % "1.2.58"
+// https://mvnrepository.com/artifact/org.apache.kudu/kudu-client
+libraryDependencies += "org.apache.kudu" % "kudu-client" % "1.7.1"
+
+
+
